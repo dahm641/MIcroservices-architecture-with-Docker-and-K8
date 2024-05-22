@@ -1,0 +1,26 @@
+# dockerfile to build image/microservice to host static website
+
+# which image to use
+
+# Use the official Nginx image as a base
+FROM nginx:latest
+
+# who is building it
+LABEL MAINTAINER=DANIAL646@HOTMAIL.CO.UK
+
+# Set the working directory in the container
+WORKDIR /usr/share/nginx/html
+
+# Copy the contents of the local directory to the container
+COPY . .
+
+# for one file can use COPY index.html /usr/share/nginx/html/
+
+# which ports to expose/enable
+EXPOSE 80
+
+# launch server using CMD
+# for nginx dont need as it has it in the base image but good practise to include
+CMD ["nginx", "-g", "daemon off;"]
+
+# create where index.html is located

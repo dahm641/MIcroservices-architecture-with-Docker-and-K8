@@ -1,0 +1,38 @@
+# create a script to build an image/microservice of nodejs app
+# containerise node app
+# build the image
+# test image on port 3000 locally
+# if works push to dockerhub and share image
+
+
+# Use the official Nginx image as a base
+FROM node:latest
+
+# who is building it
+LABEL MAINTAINER=DANIAL646@HOTMAIL.CO.UK
+
+# start at root
+WORKDIR /usr/src/
+
+# copy the app
+
+COPY . .
+
+# move to working directory
+
+WORKDIR /usr/src/app
+
+# Install NPM
+
+RUN npm install
+
+# Install PM2 (Dont need pm2 but included anyways)
+
+RUN npm install -g pm2 
+
+# port
+EXPOSE 3000
+
+# launch
+CMD ["pm2-runtime", "start", "app.js"]
+
